@@ -22,7 +22,7 @@ Cada StructField(...) define una columna"""
 
     df = (
         spark.read
-        .option('header', True) # ndica a Spark que la primera fila del CSV contiene los nombres de las columnas
+        .option('header', True) # indica a Spark que la primera fila del CSV contiene los nombres de las columnas
         .schema(schema)
         .csv(str(ruta_csv))
     )
