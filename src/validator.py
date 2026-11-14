@@ -1,5 +1,5 @@
 from pyspark.sql import SparkSession
-from pyspark.sql.types import StructType, StructField, DoubleType, LongType
+from pyspark.sql.types import StructType, StructField, IntegerType, LongType
 from pyspark.sql import functions as F
 from pathlib import Path
 
@@ -21,7 +21,7 @@ Cada StructField(...) define una columna"""
     schema = StructType([
         StructField('id', LongType(), True), # el 3er @arg indica que la columna puede contener valores nulos. 
         StructField('cliente_id', LongType(), True),
-        StructField('valor', DoubleType(), True),
+        StructField('valor', IntegerType(), True),
     ])
 
     df = (
@@ -45,15 +45,15 @@ def generar_resumen(df_validos):
 
 def main():
     spark = inizializar_spark()
-    ruta = Path(__file__).resolve().parent[1]/'data'/'transacciones_practica.csv'
+    ruta = Path(__file__).resolve().parents[1] / 'data' / 'transacciones_practica.csv'
 
     df_raw = cargas_datos(spark, ruta)
     df_raw.show()
     spark.stop()
 
 
-
-main()
+if __name__ == '__main__':
+    main()
 
 
 
